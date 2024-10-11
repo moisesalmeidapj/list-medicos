@@ -1,0 +1,74 @@
+<div class="medico-list">
+    <h2>Lista de Médicos</h2>
+    <ul *ngIf="medicos.length > 0; else noData">
+      <li *ngFor="let medico of medicos">
+        <h3>{{ medico.nome }}</h3>
+        <p><strong>Email:</strong> {{ medico.email }}</p>
+        <p><strong>CRM:</strong> {{ medico.crm }}</p>
+        <p><strong>Especialidade:</strong> {{ medico.especialidade }}</p>
+        <div class="endereco">
+          <h4>Endereço:</h4>
+          <p><strong>Logradouro:</strong> {{ medico.endereco.logradouro }}</p>
+          <p><strong>Bairro:</strong> {{ medico.endereco.bairro }}</p>
+          <p><strong>CEP:</strong> {{ medico.endereco.cep }}</p>
+          <p><strong>Número:</strong> {{ medico.endereco.numero }}</p>
+          <p><strong>Complemento:</strong> {{ medico.endereco.complemento || 'N/A' }}</p>
+          <p><strong>Cidade:</strong> {{ medico.endereco.cidade }}</p>
+        </div>
+      </li>
+    </ul>
+    <ng-template #noData>
+      <p>Procurando...</p>
+    </ng-template>
+  </div>
+  
+  <div class="novo-medico-form">
+    <h2>Registrar Novo Médico</h2>
+    <form #medicoForm="ngForm" (ngSubmit)="onSubmit(medicoForm)">
+      <div>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" [(ngModel)]="novoMedico.nome" required>
+      </div>
+  
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="novoMedico.email" required>
+      </div>
+  
+      <div>
+        <label for="crm">CRM:</label>
+        <input type="text" id="crm" name="crm" [(ngModel)]="novoMedico.crm" required>
+      </div>
+  
+      <div>
+        <label for="especialidade">Especialidade:</label>
+        <input type="text" id="especialidade" name="especialidade" [(ngModel)]="novoMedico.especialidade" required>
+      </div>
+  
+      <div>
+        <h4>Endereço</h4>
+        <label for="logradouro">Logradouro:</label>
+        <input type="text" id="logradouro" name="logradouro" [(ngModel)]="novoMedico.endereco.logradouro" required>
+  
+        <label for="bairro">Bairro:</label>
+        <input type="text" id="bairro" name="bairro" [(ngModel)]="novoMedico.endereco.bairro" required>
+  
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" name="cep" [(ngModel)]="novoMedico.endereco.cep" required>
+  
+        <label for="numero">Número:</label>
+        <input type="text" id="numero" name="numero" [(ngModel)]="novoMedico.endereco.numero" required>
+  
+        <label for="complemento">Complemento:</label>
+        <input type="text" id="complemento" name="complemento" [(ngModel)]="novoMedico.endereco.complemento">
+  
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" [(ngModel)]="novoMedico.endereco.cidade" required>
+
+        <label for="UF">uf:</label>
+        <input type="text" id="uf" name="uf" [(ngModel)]="novoMedico.endereco.uf" required>
+      </div>
+  
+      <button type="submit" [disabled]="!medicoForm.valid">Registrar Médico</button>
+    </form>
+  </div>
